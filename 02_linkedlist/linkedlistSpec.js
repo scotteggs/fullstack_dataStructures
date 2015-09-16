@@ -111,7 +111,7 @@ describe("linkedList", function() {
     linkedList.addToTail('one');
     linkedList.addToTail('two');
     expect(linkedList.search(function(node) {
-      return node.value === "two";
+      return node.value == "two";
     })).toEqual('two');
   });
 

@@ -59,12 +59,18 @@ LinkedList.prototype.removeTail = function() {
 	return oldTail;
 }
 
+
+///Beginning of search recursively
 LinkedList.prototype.search = function(param) {
-
-
 	var currentNode = this.head;
-	while(currentNode !== null) {
-		if (typeof param === 'string') {
+	return searchRecursive(param, currentNode);
+}
+
+
+function searchRecursive (param, currentNode) {
+			if (currentNode === null) {
+				return null
+			} else if (typeof param === 'string') {
 			if (typeof currentNode.value === 'string' && currentNode.value === param) {
 				return currentNode.value;
 			}
@@ -76,15 +82,45 @@ LinkedList.prototype.search = function(param) {
 				}
 			}
 		}
-		if (typeof param === 'function') {
+		if (typeof param == 'function') {
 			if (param(currentNode)) {
 				return currentNode.value;
 			}
 	 	}
-		currentNode = currentNode.next;
-	}
-	return null;
+		return searchRecursive (param, currentNode.next);
+
 }
+
+
+
+
+
+
+//Current working solution
+// LinkedList.prototype.search = function(param) {
+// 	var currentNode = this.head;
+// 	while(currentNode !== null) {
+// 		if (typeof param === 'string') {
+// 			if (typeof currentNode.value === 'string' && currentNode.value === param) {
+// 				return currentNode.value;
+// 			}
+// 			if (typeof currentNode.value === 'object') {
+// 				for (var key in currentNode.value) {
+// 					if (currentNode.value[key] === param) {
+// 						return currentNode.value;
+// 					}
+// 				}
+// 			}
+// 		}
+// 		if (typeof param == 'function') {
+// 			if (param(currentNode)) {
+// 				return currentNode.value;
+// 			}
+// 	 	}
+// 		currentNode = currentNode.next;
+// 	}
+// 	return null;
+// }
 
 function Node(value) {
 	this.value = value;
